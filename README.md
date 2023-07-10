@@ -1,5 +1,7 @@
 # Tenzies
 
+## Tenzies is live at https://ljenchik.github.io/tenzies/
+
 ## Description
 
 Tenzies is an online adaptation of the popular game Tenzi, where instead of physically rolling dice, players press a button to simulate the roll. The number of rolls will be displayed on the screen. The less this number the better!
