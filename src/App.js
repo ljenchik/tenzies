@@ -1,5 +1,5 @@
 import "./style.css";
-import RandomNumberButton from "./RandomNumberButton";
+import RandomNumberButton from "./components/RandomNumberButton";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 //import useWindowSize from 'react-use/lib/useWindowSize'
