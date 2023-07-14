@@ -2,7 +2,6 @@ import "./style.css";
 import RandomNumberButton from "./components/RandomNumberButton";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-//import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti';
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
     );
     let diceArray = [];
     for (let i = 0; i < numArray.length; i++) {
-      diceArray.push({ value: numArray[i], isHeld: false, id: nanoid() });
+      diceArray.push({ value: numArray[i], isHeld: false, id: nanoid()});
     }
     return diceArray;
   };
