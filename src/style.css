@@ -15,6 +15,10 @@ body {
   align-items: center;
 }
 
+.score-text {
+  margin-top: 15px;
+}
+
 .black-square {
   display: flex;
   justify-content: center;
@@ -101,20 +105,25 @@ body {
   background: #59e391;
 }
 
+.dot-container {
+  display: flex;
+}
+
 .face {
   display: grid;
   grid-template-areas:
-      "a . c"
-      "e g f"
-      "d . b";
-   width: 30px;
-   height: 30px;  
-   margin-top: 5px; 
+    "a . c"
+    "e g f"
+    "d . b";
+  height: 30px;
+  width: 30px;
+  justify-items: center;
+  align-items: center;
 }
 
 .pip {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: black;
 }
@@ -138,3 +147,4 @@ body {
 .pip:nth-child(odd):last-child {
   grid-area: g;
 }
+

@@ -21,6 +21,7 @@ function App() {
   const [clicked, setClicked] = useState(0);
   const [tenzies, setTenzies] = useState(false);
   const [message, setMessage] = useState("");
+  const [score, setScore] = useState(localStorage.getItem("Best score in Tenzies"));
 
   useEffect(() => {
     let all = numArray.every(die => die.isHeld && die.value === numArray[0].value);
@@ -28,6 +29,17 @@ function App() {
       setTenzies(true);
       setButtonText("Reset");
       setMessage("Congratulations! You won!");
+      if (score) {
+        if (clicked < score) {
+          setScore(clicked);
+          localStorage.setItem("Best score in Tenzies", JSON.stringify(clicked));
+        }
+      }
+      else {
+        setScore(clicked);
+          localStorage.setItem("Best score in Tenzies", JSON.stringify(clicked));
+      }
+      
     }
   }, [numArray]);
 
@@ -58,7 +70,8 @@ function App() {
 
   return (
     <div className="main-container title">
-      <p>Score: {clicked}</p>
+      {score ? <p className="score-text">Best score: {score}</p> : ''}
+      <p className="score-text">Your score: {clicked}</p>
       <div className="black-square">
         <div className="grey-square">
           <div className="title">Tenzies</div>
@@ -82,8 +95,6 @@ function App() {
         </div>
       </div>
       {tenzies ? <Confetti
-      // width={width}
-      // height={height}
     /> : ""}
       <p>{message}</p>
     </div>

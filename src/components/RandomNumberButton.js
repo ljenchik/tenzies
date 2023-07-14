@@ -4,7 +4,7 @@ const RandomNumberButton = (props) => {
   for (let i = 0; i < props.value; i++) {
     dots.push(i);
   }
-  
+
   return (
     <button
       className={
@@ -12,11 +12,14 @@ const RandomNumberButton = (props) => {
       }
       onClick={props.onDiceClick}
     >
-      <div className="face">
+        <div className="dot-container">
+        <div className="face">
         {dots.map(() => (
           <span className="pip"></span>
         ))}
       </div>
+        </div>
+     
     </button>
   );
 };
