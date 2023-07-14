@@ -4,7 +4,7 @@
 
 ## Description
 
-Tenzies is an online adaptation of the popular game Tenzi, where instead of physically rolling dice, players press a button to simulate the roll. The number of rolls will be displayed on the screen. The less this number the better!
+Tenzies is an online adaptation of the popular game Tenzi, where instead of physically rolling dice, players press a button to simulate the roll. The aim of the game is to get all ten dice the same. The number of rolls will be displayed on the screen. The less this number the better!
 
 ## Technologies used 
 
