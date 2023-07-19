@@ -23,7 +23,7 @@ npm start
 ## Acnowledgements
 
 This project is based on the guidance and steps provided by Bob Ziroll's  <a href="https://www.youtube.com/watch?v=bMknfKXIFA8"> 
-"React Course - Beginner's Tutorial for React JavaScript Library [2022]"</a>. 
+"React Course - Beginner's Tutorial for React JavaScript Library [2022]"</a>. Additionally, I have implemented features to display the number of rolls and the timer on the screen, along with the best score and best time. These best score and time values are stored in the local storage of the user's browser.
 
 <img width="300" alt="Screenshot 2023-07-10 at 20 44 53" src="https://github.com/ljenchik/tenzies/assets/84686704/63c655b2-5186-4f3c-88f8-26d8432e8eac">
 <img width="280" alt="Screenshot 2023-07-10 at 20 45 15" src="https://github.com/ljenchik/tenzies/assets/84686704/1b75898f-b486-476d-9e46-c222a258a13d">
