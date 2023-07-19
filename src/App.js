@@ -2,7 +2,8 @@ import "./style.css";
 import RandomNumberButton from "./components/RandomNumberButton";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-import Confetti from 'react-confetti';
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 function App() {
   const randomArray = () => {
@@ -11,37 +12,75 @@ function App() {
     );
     let diceArray = [];
     for (let i = 0; i < numArray.length; i++) {
-      diceArray.push({ value: numArray[i], isHeld: false, id: nanoid()});
+      diceArray.push({ value: numArray[i], isHeld: false, id: nanoid() });
     }
     return diceArray;
   };
-  // const { width, height } = useWindowSize();
+
   const [numArray, setNumArray] = useState(randomArray());
   const [buttonText, setButtonText] = useState("Roll");
+
   const [clicked, setClicked] = useState(0);
+
   const [tenzies, setTenzies] = useState(false);
   const [message, setMessage] = useState("");
-  const [score, setScore] = useState(localStorage.getItem("Best score in Tenzies"));
+
+  const bestScore = localStorage.getItem("Best score in Tenzies");
+  
+  const bestTime = localStorage.getItem("Best time in Tenzies");
+
+  const { width, height } = useWindowSize();
+
+  const [timer, setTimer] = useState(0);
+
+  let interval;
+  useEffect(() => {
+    //Implementing the setInterval method
+    interval = setInterval(() => {
+      setTimer(timer + 1);
+    }, 1000);
+
+    //Clearing the interval
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timer]);
 
   useEffect(() => {
-    let all = numArray.every(die => die.isHeld && die.value === numArray[0].value);
+    let all = numArray.every(
+      (die) => die.isHeld && die.value === numArray[0].value
+    );
+
     if (all) {
       setTenzies(true);
       setButtonText("Reset");
-      setMessage("Congratulations! You won!");
-      if (score) {
-        if (clicked < score) {
-          setScore(clicked);
-          localStorage.setItem("Best score in Tenzies", JSON.stringify(clicked));
+      setMessage("Congratulations!");
+      setTimer(timer);
+
+      if (bestScore) {
+        if (clicked < bestScore) {
+          localStorage.setItem(
+            "Best score in Tenzies",
+            JSON.stringify(clicked)
+          );
         }
+      } else {
+        localStorage.setItem("Best score in Tenzies", JSON.stringify(clicked));
       }
-      else {
-        setScore(clicked);
-          localStorage.setItem("Best score in Tenzies", JSON.stringify(clicked));
+
+      if (bestTime) {
+        if (timer < bestTime) {
+          localStorage.setItem(
+            "Best time in Tenzies",
+            JSON.stringify(timer)
+          );
+        }
+      } else {
+        localStorage.setItem("Best time in Tenzies", JSON.stringify(timer));
       }
-      
+      clearInterval(interval);
     }
-  }, [numArray]);
+  }, [timer, numArray]);
 
   const handleClick = () => {
     for (let i = 0; i < numArray.length; i++) {
@@ -51,27 +90,31 @@ function App() {
     }
     setNumArray([...numArray]);
     setClicked(clicked + 1);
+
     if (buttonText === "Reset") {
       setNumArray(randomArray());
       setMessage("");
       setButtonText("Roll");
       setClicked(0);
+      setTimer(0);
       setTenzies(false);
     }
   };
 
   const holdDice = (id) => {
     const dieToHold = numArray.filter((die) => die.id === id)[0];
-      dieToHold.isHeld = !dieToHold.isHeld;
-      setNumArray([...numArray]);
+    dieToHold.isHeld = !dieToHold.isHeld;
+    setNumArray([...numArray]);
   };
-
-
 
   return (
     <div className="main-container title">
-      {score ? <p className="score-text">Best score: {score}</p> : ''}
+      {bestScore ? <p className="score-text">Best score: {bestScore}</p> : ""}
+      {bestTime ? <p className="score-text">Best time: {bestTime}</p> : ""}
+
       <p className="score-text">Your score: {clicked}</p>
+      <p className="score-text">Your time: {timer}</p>
+
       <div className="black-square">
         <div className="grey-square">
           <div className="title">Tenzies</div>
@@ -94,8 +137,7 @@ function App() {
           </button>
         </div>
       </div>
-      {tenzies ? <Confetti
-    /> : ""}
+      {tenzies ? <Confetti width={width} height={height} /> : ""}
       <p>{message}</p>
     </div>
   );
